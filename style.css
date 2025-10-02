@@ -1,0 +1,1292 @@
+/* General Body Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- FINAL ANIMATED NON-REPEATING BACKGROUND --- */
+.minecraft-bg {
+    position: absolute;
+    width: 200%; /* Make the element larger than the screen */
+    height: 200%;
+    top: -50%; /* Position it to cover the screen */
+    left: -50%;
+    z-index: 0;
+    background-repeat: repeat; /* This will tile our large generated image */
+    /* The animation that makes it scroll */
+    animation: scroll-background 80s linear infinite; /* Slower speed */
+}
+
+@keyframes scroll-background {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(25%, 25%); /* Scrolls to the bottom-right */
+    }
+}
+
+
+/* --- MINECRAFT UI STYLES --- */
+h1, h2, button, .minecraft-label, .minecraft-radio-label {
+    font-family: 'Press Start 2P', cursive;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    background-color: #A0A0A0;
+    border: 4px solid #5C5C5C;
+    border-radius: 8px;
+    box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,0.2),
+        inset 0 0 0 4px rgba(0,0,0,0.1),
+        0 10px 0 #3A3A3A,
+        0 12px 15px rgba(0,0,0,0.4);
+    padding: 30px;
+    text-align: center;
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    z-index: 1;
+    animation: popIn 0.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.8) translateY(-30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.game-title {
+    font-size: 3.5em;
+    color: #c0c0c0;
+    line-height: 1.1;
+    display: inline-block;
+    position: relative;
+    text-shadow:
+        -2px -2px 0px #fff,
+        2px 2px 0px #555;
+}
+
+.game-title .block-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    color: #4a4a4a;
+    text-shadow:
+        1px 1px 0 #4a4a4a,
+        2px 2px 0 #4a4a4a,
+        3px 3px 0 #4a4a4a,
+        4px 4px 0 #4a4a4a,
+        5px 5px 0 #3a3a3a,
+        6px 6px 0 #3a3a3a,
+        7px 7px 0 #3a3a3a;
+}
+
+.tagline {
+    font-family: 'VT323', monospace;
+    font-size: 1.3em;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: rgba(0,0,0,0.4);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.auth-card {
+    background-color: #B0B0B0;
+    border: 2px solid #7A7A7A;
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3), 0 5px 0 #606060;
+}
+
+.auth-card h2 {
+    font-size: 1.8em;
+    color: #263238;
+    text-shadow: 1px 1px #000;
+    margin-top: 0;
+    margin-bottom: 20px;
+    background-color: #8C8C8C;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.input-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.minecraft-label {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    background-color: rgba(0,0,0,0.3);
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.minecraft-input-field {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 3px solid #606060;
+    border-radius: 5px;
+    font-size: 1.1em;
+    transition: all 0.2s ease;
+    background-color: #D3D3D3;
+    color: #333;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+    font-family: 'VT323', monospace;
+    text-shadow: 1px 1px #FFF;
+}
+
+.minecraft-input-field:focus {
+    border-color: #8BC34A;
+    box-shadow: 0 0 0 2px #8BC34A, inset 0 0 0 1px rgba(255,255,255,0.6);
+    outline: none;
+    background-color: #E6FFE6;
+}
+
+.role-selection {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+    padding: 15px;
+    background-color: #8B4513;
+    border-radius: 8px;
+    border: 2px solid #5C2B0B;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3), 0 5px 0 #3A1F09;
+}
+
+.role-selection .minecraft-label {
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    font-size: 1em;
+    background-color: transparent;
+}
+
+.radio-group {
+    display: inline-block;
+    margin: 0 15px;
+    position: relative;
+}
+
+.role-selection input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.minecraft-radio-label {
+    display: block;
+    cursor: pointer;
+    background-color: #D2B48C;
+    color: #4A301A;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 2px solid #8B4513;
+    box-shadow: 0 3px 0 #5C2B0B;
+    transition: all 0.1s ease-out;
+    margin-top: 10px;
+}
+
+.role-selection input[type="radio"]:checked + .minecraft-radio-label {
+    background-color: #8BC34A;
+    color: #2E7D32;
+    border-color: #558B2F;
+    box-shadow: 0 1px 0 #558B2F;
+    transform: translateY(2px);
+}
+
+.minecraft-radio-label:hover {
+    background-color: #F5DEB3;
+}
+
+.btn.minecraft-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 2px solid #5C2B0B;
+    border-radius: 5px;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+    box-shadow: 0 5px 0 #3A1F09, 0 8px 10px rgba(0,0,0,0.3);
+    text-decoration: none;
+    text-shadow: 1px 1px #000;
+    color: #FFF;
+}
+
+.primary-btn {
+    background-color: #8B4513;
+}
+
+.primary-btn:hover {
+    background-color: #A0522D;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #3A1F09, 0 10px 12px rgba(0,0,0,0.4);
+}
+
+.primary-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #3A1F09, 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.toggle-link, .forgot-password-link {
+    margin-top: 18px;
+    font-size: 1.1em;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+}
+
+.minecraft-link {
+    color: #8BC34A;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px #388E3C;
+    transition: color 0.2s ease;
+}
+
+.minecraft-link:hover {
+    color: #A5D6A7;
+    text-decoration: underline;
+}
+
+.message-area {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #444;
+    display: none;
+    font-family: 'VT323', monospace;
+}
+
+.message-area.success {
+    background-color: #4CAF50;
+    border-color: #2E7D32;
+}
+
+.message-area.error {
+    background-color: #F44336;
+    border-color: #D32F2F;
+}
+
+@media (max-width: 600px) {
+    .game-title {
+        font-size: 2.5em;
+    }
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    .btn.minecraft-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+    .minecraft-label, .minecraft-radio-label {
+        font-size: 0.8em;
+    }
+}
+
+/* --- NEW DASHBOARD & QUIZ STYLES --- */
+.selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.back-btn {
+    margin-top: 20px;
+    background-color: #767676; /* Stone color */
+    box-shadow: 0 5px 0 #4a4a4a;
+}
+.back-btn:hover {
+    background-color: #888;
+    box-shadow: 0 7px 0 #4a4a4a;
+}
+.back-btn:active {
+    box-shadow: 0 2px 0 #4a4a4a;
+}
+
+.chapter-list {
+    text-align: left;
+}
+
+.chapter-item {
+    background-color: #B0B0B0;
+    border: 2px solid #7A7A7A;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chapter-item h3 {
+    margin: 0;
+    font-family: 'VT323', monospace;
+    font-size: 1.5em;
+    color: #3E3E3E;
+}
+
+.chapter-buttons .btn {
+    font-size: 0.8em;
+    padding: 8px 12px;
+    margin-left: 10px;
+}
+
+.quiz-paragraph {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 15px;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #3E3E3E;
+    border: 2px solid #7A7A7A;
+}
+
+.quiz-timer {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #3E3E3E;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.question-block {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.question-block p {
+    font-family: 'VT323', monospace;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #3E3E3E;
+}
+
+.options-group label {
+    display: block;
+    background-color: #8B4513;
+    color: #fff;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border: 2px solid #5C2B0B;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 1.2em;
+}
+
+.options-group input {
+    display: none;
+}
+
+.options-group input:checked + label {
+    background-color: #8BC34A;
+    border-color: #558B2F;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Certificate Styles */
+#certificate {
+    background-color: #D2B48C; /* Paper/Wood color */
+    border: 10px solid #8B4513;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.certificate-text { font-family: 'VT323', monospace; font-size: 1.2em; margin: 5px 0; color: #5C2B0B; }
+.certificate-name { font-family: 'Press Start 2P', cursive; font-size: 1.8em; color: #8B4513; margin: 10px 0; }
+.certificate-chapter { font-family: 'VT323', monospace; font-style: italic; font-size: 1.4em; color: #5C2B0B; margin: 10px 0; }
+.results-details { margin-top: 20px; font-size: 1.2em; }
+
+/* Leaderboard Table */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #B0B0B0;
+    border: 2px solid #7A7A7A;
+}
+.leaderboard-table th, .leaderboard-table td {
+    border: 2px solid #7A7A7A;
+    padding: 10px;
+    font-family: 'VT323', monospace;
+    font-size: 1.2em;
+}
+.leaderboard-table th {
+    background-color: #767676;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9em;
+}
+
+/* Make button text darker for better readability on the dashboard */
+.selection-grid .btn.minecraft-btn {
+    color: #7e4f29; /* A dark wood text color */
+    text-shadow: 1px 1px #D2B48C; /* A light shadow for contrast */
+}
+
+/* Fix for dashboard button text wrapping */
+.selection-grid .selection-btn {
+    font-size: 1.1em; /* Makes font slightly smaller to fit */
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Fix for spacing between bottom buttons */
+.container .back-btn {
+    margin-bottom: 15px; /* Adds space below the back button */
+}
+
+/* --- Quiz View Redesign (Wooden Plank UI) --- */
+.wooden-plank-quiz-container {
+    background-image: url('assets/wooden_plank_texture.png'); /* You'll need to add this image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 4px solid #3d2f26; /* Darker border for depth */
+    border-radius: 8px;
+    padding: 30px; /* More padding for bigger content */
+    margin: 20px auto;
+    max-width: 900px; /* Increased width */
+    width: 90%; /* Responsive width */
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+    position: relative;
+    z-index: 10;
+}
+
+.wooden-plank-quiz-container .title-text {
+    font-size: 2.8em; /* Much larger title */
+    color: #fff; /* White text for contrast */
+    text-shadow: 4px 4px 0px #3d2f26; /* Stronger text shadow */
+    margin-bottom: 20px;
+}
+
+.time-box {
+    background-color: #4CAF50; /* A nice green for time */
+    border: 3px solid #388E3C; /* Darker green border */
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin: 15px auto 25px auto; /* More margin */
+    display: inline-block; /* To make it fit its content */
+    font-size: 1.8em; /* Larger time text */
+    color: #fff;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-content-box {
+    background-color: rgba(200, 190, 160, 0.9); /* Lighter, slightly transparent background */
+    border: 3px solid #7c6853; /* Border matching wood */
+    border-radius: 6px;
+    padding: 25px; /* Ample padding */
+    margin-bottom: 25px; /* Space before submit button */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2); /* Inner shadow for depth */
+}
+
+.minecraft-paragraph.large-text {
+    font-size: 1.4em; /* Larger paragraph text */
+    line-height: 1.6; /* Improved readability */
+    margin-bottom: 25px; /* Space between paragraph and questions */
+    color: #333; /* Darker text for readability on light background */
+    text-shadow: none; /* No shadow on paragraph for clarity */
+}
+
+.questions-container .question-block {
+    background-color: rgba(255, 255, 255, 0.95); /* White background for questions */
+    border: 2px solid #a0a0a0;
+    border-radius: 4px;
+    padding: 18px; /* More padding per question */
+    margin-bottom: 20px; /* Space between questions */
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.questions-container .question-block p {
+    font-size: 1.3em; /* Larger question text */
+    color: #222; /* Darker question text */
+    margin-bottom: 15px; /* Space between question and options */
+    text-shadow: none;
+}
+
+.questions-container .options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between options */
+}
+
+.questions-container .options-group input[type="radio"] {
+    transform: scale(1.5); /* Larger radio buttons */
+    margin-right: 12px;
+}
+
+.questions-container .options-group label {
+    font-size: 1.2em; /* Larger option text */
+    color: #444;
+    cursor: pointer;
+    padding: 5px 0;
+    display: inline-flex; /* Align radio and label */
+    align-items: center;
+}
+
+/* Larger Submit Button */
+.large-button {
+    font-size: 1.8em; /* Much larger button text */
+    padding: 15px 30px; /* More padding */
+    min-width: 250px; /* Ensure button is wide enough */
+    margin-top: 20px; /* Space from content box */
+}
+
+/* --- NEW STYLES FOR WOODEN PLANK QUIZ & BETTER BADGE --- */
+
+.wooden-plank-quiz-container {
+    background-color: #8B4513; /* Wood color */
+    border: 4px solid #5C2B0B;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px; /* Wider for quizzes */
+    width: 90%;
+    box-shadow: 0 10px 0 #3A1F09;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.wooden-plank-quiz-container h2 {
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 2px 2px #3A1F09;
+}
+
+.quiz-content-box {
+    background-color: #D2B48C; /* Lighter wood/paper color */
+    border: 2px solid #5C2B0B;
+    border-radius: 4px;
+    padding: 25px;
+    margin: 20px 0;
+    text-align: left;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.quiz-content-box p {
+    font-family: 'VT323', monospace;
+    font-size: 1.4em; /* Bigger text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+.question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.1em; /* Bigger question text */
+}
+
+.options-group label {
+    font-size: 1.2em; /* Bigger option text */
+    background-color: #C6C6C6;
+    border-color: #585858;
+}
+
+.options-group input:checked + label {
+    background-color: #8BC34A; /* Green for selected */
+    border-color: #558B2F;
+}
+
+/* Better Certificate Styles */
+.certificate-modal {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+#certificate {
+    background-color: #D2B48C;
+    border: 10px solid #8B4513;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.certificate-title {
+    font-size: 2.5em;
+    color: #4CAF50;
+    text-shadow: 2px 2px #2E7D32;
+    margin-bottom: 20px;
+}
+
+.certificate-info { font-size: 1.1em; color: #5C2B0B; }
+.certificate-user-name { font-size: 2em; color: #5C2B0B; text-shadow: 1px 1px #fff; margin: 10px 0; }
+.certificate-quiz-title { font-size: 1.5em; font-style: italic; color: #3A1F09; margin-bottom: 20px; }
+
+.certificate-details {
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 5px;
+}
+.certificate-details p { font-size: 1.2em; color: #3A1F09; margin: 5px 0; }
+.certificate-details span { font-weight: bold; }
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- NEW DARK WOODEN PLANK QUIZ THEME & LARGER TEXT --- */
+
+.wooden-plank-quiz-container {
+    /* Use your new background image */
+    background-image: url('images/dark_wood_planks.png'); /* Adjust path if needed */
+    background-size: cover; /* This makes the image cover the entire container */
+    background-color: #3f2a1d; /* Fallback color in case image doesn't load, matches dark wood */
+    border: 4px solid #1a0e08; /* Darker border to match the image */
+    border-radius: 8px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 10px 0 #120905; /* Darker shadow */
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* --- REVERTED DARK STONE QUIZ THEME --- */
+
+#quiz-view.container {
+    background-color: #767676; /* Dark stone color */
+    border: 4px solid #373737;
+    box-shadow: 0 10px 0 #2a2a2a;
+    max-width: 800px; /* Keep it wide for readability */
+}
+
+#quiz-view h2 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #373737;
+}
+
+#quiz-view .quiz-paragraph {
+    background-color: #C6C6C6; /* Lighter stone color */
+    border: 2px solid #585858;
+    font-size: 1.6em; /* Large, clear text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+#quiz-view .question-block {
+    margin-top: 25px;
+}
+
+#quiz-view .question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    color: #fff;
+    text-shadow: 1px 1px #373737;
+}
+
+#quiz-view .options-group label {
+    font-size: 1.4em;
+    background-color: #A0A0A0; /* Stone button color */
+    border-color: #585858;
+    color: #3E3E3E;
+}
+
+
+/* --- NEW STYLES FOR WOODEN PLANK QUIZ & BETTER BADGE --- */
+
+.wooden-plank-quiz-container {
+    background-color: #8B4513; /* Wood color */
+    border: 4px solid #5C2B0B;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 800px; /* Wider for quizzes */
+    width: 90%;
+    box-shadow: 0 10px 0 #3A1F09;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.wooden-plank-quiz-container h2 {
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 2px 2px #3A1F09;
+}
+
+.quiz-content-box {
+    background-color: #D2B48C; /* Lighter wood/paper color */
+    border: 2px solid #5C2B0B;
+    border-radius: 4px;
+    padding: 25px;
+    margin: 20px 0;
+    text-align: left;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.quiz-content-box p {
+    font-family: 'VT323', monospace;
+    font-size: 1.6em; /* Bigger text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+.question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em; /* Bigger question text */
+}
+
+.options-group label {
+    font-size: 1.4em; /* Bigger option text */
+    background-color: #C6C6C6;
+    border-color: #585858;
+}
+
+.options-group input:checked + label {
+    background-color: #8BC34A; /* Green for selected */
+    border-color: #558B2F;
+}
+
+/* Better Certificate Styles */
+.certificate-modal {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+#certificate {
+    background-color: #D2B48C;
+    border: 10px solid #8B4513;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.cert-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.cert-star {
+    font-size: 2.5em;
+    color: #FFD700;
+    text-shadow: 2px 2px #E65100;
+}
+
+.certificate-title {
+    font-size: 2.2em;
+    color: #4CAF50; /* Green for success */
+    text-shadow: 2px 2px #2E7D32;
+    margin: 0;
+}
+
+.certificate-info { font-size: 1.2em; color: #5C2B0B; margin: 5px 0; }
+.certificate-user-name { font-size: 2.2em; color: #5C2B0B; text-shadow: 1px 1px #fff; margin: 10px 0; }
+.certificate-quiz-title { font-size: 1.5em; font-style: italic; color: #3A1F09; margin-bottom: 20px; }
+
+.certificate-details {
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.05);
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid rgba(0,0,0,0.1);
+    display: inline-block;
+}
+.certificate-details p { font-size: 1.3em; color: #3A1F09; margin: 5px 0; }
+.certificate-details span { font-weight: bold; }
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- FIX for Quiz View Layout and Buttons --- */
+#quiz-view {
+    position: fixed; /* Makes it a full-screen overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Centers the content vertically and horizontally */
+    justify-content: center;
+    align-items: center;
+    z-index: 50; /* Ensures it's on top of the dashboard */
+    padding: 20px;
+    box-sizing: border-box; /* Includes padding in the element's total width and height */
+}
+
+/* --- NEW Dark Stone Quiz Theme --- */
+.wooden-plank-quiz-container {
+    background-color: #767676; /* Dark stone color */
+    border: 4px solid #373737;
+    box-shadow: 0 10px 0 #2a2a2a;
+    max-width: 800px;
+    width: 100%; /* Take full width within the centered view */
+    max-height: 90vh; /* Prevents it from being too tall on some screens */
+    overflow-y: auto; /* Adds a scrollbar if content is too long */
+}
+
+.wooden-plank-quiz-container h2 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #373737;
+}
+
+.quiz-content-box {
+    background-color: #C6C6C6; /* Lighter stone color */
+    border: 2px solid #585858;
+}
+
+.quiz-content-box p {
+    font-size: 1.6em; /* Large, clear text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+.question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    color: #fff;
+    text-shadow: 1px 1px #373737;
+}
+
+/* --- FIX for Answer Buttons --- */
+.options-group label {
+    display: block; /* Makes the whole area clickable */
+    font-size: 1.4em;
+    background-color: #A0A0A0;
+    border: 2px solid #585858;
+    color: #3E3E3E;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.options-group label:hover {
+    background-color: #b0b0b0;
+}
+
+.options-group input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.options-group input[type="radio"]:checked + label {
+    background-color: #8BC34A; /* Green when selected */
+    border-color: #558B2F;
+    color: #fff;
+}
+
+/* --- FIX for Quiz View Layout and Buttons --- */
+#quiz-view {
+    position: fixed; /* Makes it a full-screen overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Keep it hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 50; /* Ensures it's on top of the dashboard */
+    padding: 20px;
+    box-sizing: border-box; /* Includes padding in the element's total width and height */
+}
+
+/* --- REVERTED Dark Stone Quiz Theme --- */
+.wooden-plank-quiz-container {
+    background-color: #767676; /* Dark stone color */
+    border: 4px solid #373737;
+    box-shadow: 0 10px 0 #2a2a2a;
+    max-width: 800px;
+    width: 100%; /* Take full width within the centered view */
+    max-height: 90vh; /* Prevents it from being too tall on some screens */
+    overflow-y: auto; /* Adds a scrollbar if content is too long */
+}
+
+.wooden-plank-quiz-container h2 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #373737;
+}
+
+.quiz-content-box {
+    background-color: #C6C6C6; /* Lighter stone color */
+    border: 2px solid #585858;
+}
+
+.quiz-content-box p {
+    font-size: 1.6em; /* Large, clear text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+.question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    color: #fff;
+    text-shadow: 1px 1px #373737;
+}
+
+/* --- FIX for Answer Buttons --- */
+.options-group label {
+    display: block; /* Makes the whole area clickable */
+    font-size: 1.4em;
+    background-color: #A0A0A0;
+    border: 2px solid #585858;
+    color: #3E3E3E;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.options-group label:hover {
+    background-color: #b0b0b0;
+}
+
+.options-group input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+.options-group input[type="radio"]:checked + span {
+    /* This will style the text, but the background change is the main indicator */
+    font-weight: bold; 
+}
+
+/* Add a specific style for the checked label itself for the glow */
+.options-group input[type="radio"]:checked + label {
+    background-color: #8BC34A; /* Green when selected */
+    border-color: #558B2F;
+    color: #fff;
+    box-shadow: 0 0 15px #8BC34A; /* The "glow" effect */
+}
+
+/* --- FIX for Quiz View Layout and Buttons --- */
+#quiz-view {
+    position: fixed; /* Makes it a full-screen overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* display: flex; is now used by the script, but we ensure it's hidden by default */
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 50; /* Ensures it's on top of the dashboard */
+    padding: 20px;
+    box-sizing: border-box; /* Includes padding in the element's total width and height */
+}
+
+/* --- Dark Stone Quiz Theme --- */
+/* This overrides any previous wooden-plank styles */
+#quiz-view .wooden-plank-quiz-container {
+    background-color: #767676; /* Dark stone color */
+    border: 4px solid #373737;
+    box-shadow: 0 10px 0 #2a2a2a;
+    max-width: 800px;
+    width: 100%; /* Take full width within the centered view */
+    max-height: 90vh; /* Prevents it from being too tall on some screens */
+    overflow-y: auto; /* Adds a scrollbar if content is too long */
+}
+
+#quiz-view .wooden-plank-quiz-container h2 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #373737;
+}
+
+#quiz-view .quiz-content-box {
+    background-color: #C6C6C6; /* Lighter stone color */
+    border: 2px solid #585858;
+}
+
+#quiz-view .quiz-content-box p {
+    font-size: 1.6em; /* Large, clear text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+#quiz-view .question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    color: #3E3E3E;
+    text-shadow: 1px 1px #fff;
+}
+
+/* --- FIX for Answer Buttons & GLOW EFFECT --- */
+#quiz-view .options-group label {
+    display: block; /* Makes the whole area clickable */
+    font-size: 1.4em;
+    background-color: #A0A0A0;
+    border: 2px solid #585858;
+    color: #3E3E3E;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#quiz-view .options-group label:hover {
+    background-color: #b0b0b0;
+}
+
+#quiz-view .options-group input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+/* This is the new rule for the GLOW effect */
+#quiz-view .options-group input[type="radio"]:checked + label {
+    background-color: #8BC34A; /* Green when selected */
+    border-color: #558B2F;
+    color: #fff;
+    /* The "glow" effect */
+    box-shadow: 0 0 15px 5px rgba(139, 195, 74, 0.7); 
+}
+
+/* --- NEW: Glow effect for selected quiz answers --- */
+#quiz-view .options-group input[type="radio"]:checked + label {
+    background-color: #8BC34A; /* A bright green when selected */
+    border-color: #558B2F;
+    color: #fff;
+    /* This creates the "glow" effect */
+    box-shadow: 0 0 15px 5px rgba(139, 195, 74, 0.7); 
+}
+
+/* --- FIX for Quiz View Layout and Buttons --- */
+#quiz-view {
+    position: fixed; /* Makes it a full-screen overlay */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* display: flex; is now used by the script, but we ensure it's hidden by default */
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 50; /* Ensures it's on top of the dashboard */
+    padding: 20px;
+    box-sizing: border-box; /* Includes padding in the element's total width and height */
+}
+
+/* --- Dark Stone Quiz Theme --- */
+/* This overrides any previous wooden-plank styles */
+.wooden-plank-quiz-container {
+    background-color: #767676; /* Dark stone color */
+    border: 4px solid #373737;
+    box-shadow: 0 10px 0 #2a2a2a;
+    max-width: 800px;
+    width: 100%; /* Take full width within the centered view */
+    max-height: 90vh; /* Prevents it from being too tall on some screens */
+    overflow-y: auto; /* Adds a scrollbar if content is too long */
+}
+
+#quiz-view .wooden-plank-quiz-container h2 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #373737;
+}
+
+#quiz-view .quiz-content-box {
+    background-color: #C6C6C6; /* Lighter stone color */
+    border: 2px solid #585858;
+}
+
+#quiz-view .quiz-content-box p {
+    font-size: 1.6em; /* Large, clear text */
+    line-height: 1.6;
+    color: #3E3E3E;
+}
+
+#quiz-view .question-block p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.3em;
+    color: #3E3E3E;
+    text-shadow: 1px 1px #fff;
+}
+
+/* --- FIX for Answer Buttons & GLOW EFFECT --- */
+#quiz-view .options-group label {
+    display: block; /* Makes the whole area clickable */
+    font-size: 1.4em;
+    background-color: #A0A0A0;
+    border: 2px solid #585858;
+    color: #3E3E3E;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#quiz-view .options-group label:hover {
+    background-color: #b0b0b0;
+}
+
+#quiz-view .options-group input[type="radio"] {
+    display: none; /* Hide the default radio button */
+}
+
+/* This is the new rule for the GLOW effect */
+#quiz-view .options-group input[type="radio"]:checked + label {
+    background-color: #8BC34A; /* Green when selected */
+    border-color: #558B2F;
+    color: #fff;
+    /* The "glow" effect */
+    box-shadow: 0 0 15px 5px rgba(139, 195, 74, 0.7); 
+}
+
+/* --- LARGER & BETTER CERTIFICATE STYLES --- */
+.certificate-modal { background: none; padding: 0; border: none; box-shadow: none; }
+#certificate {
+    background-color: #D2B48C;
+    border: 10px solid #8B4513;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    text-align: center;
+}
+.cert-header { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 20px; }
+.cert-star { font-size: 3em; color: #FFD700; text-shadow: 2px 2px #E65100; }
+.certificate-title { font-size: 2.8em; color: #4CAF50; text-shadow: 2px 2px #2E7D32; margin: 0; }
+.certificate-info { font-family: 'VT323', monospace; font-size: 1.5em; color: #5C2B0B; margin: 8px 0; }
+.certificate-user-name { font-size: 2.5em; color: #5C2B0B; text-shadow: 1px 1px #fff; margin: 15px 0; }
+.certificate-quiz-title { font-family: 'VT323', monospace; font-size: 1.8em; font-style: italic; color: #3A1F09; margin-bottom: 25px; }
+.certificate-details { margin-top: 20px; background-color: rgba(0,0,0,0.05); padding: 15px; border-radius: 5px; border: 2px solid rgba(0,0,0,0.1); display: inline-block; }
+.certificate-details p { font-size: 1.5em; color: #3A1F09; margin: 5px 0; }
+.certificate-details span { font-weight: bold; }
+
+/* --- LEADERBOARD TABLE --- */
+.leaderboard-table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #B0B0B0; border: 2px solid #7A7A7A; }
+.leaderboard-table th, .leaderboard-table td { border: 2px solid #7A7A7A; padding: 10px; font-size: 1.2em; }
+.leaderboard-table th { background-color: #767676; color: #fff; font-size: 0.9em; }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.modal-content { 
+    width: 90%; 
+    max-width: 800px; /* Wider for editor */
+    /* NEW: Scrolling for modals */
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* --- NEW: Quiz Editor Specific Styles --- */
+#quiz-editor-form label {
+    font-size: 1.4em; /* Bigger labels */
+    font-family: 'VT323', monospace;
+    text-align: left;
+    display: block;
+    color: #3E3E3E;
+    margin-top: 15px;
+}
+#quiz-editor-form .minecraft-input-field {
+    font-size: 1.3em; /* Bigger inputs */
+}
+#questions-editor-container {
+    border: 2px solid #7A7A7A;
+    padding: 15px;
+    margin-top: 20px;
+    max-height: 450px; /* INCREASED HEIGHT for scrollable area */
+    overflow-y: auto;
+}
+#quiz-editor-form .question-block {
+    background-color: #B0B0B0;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+#quiz-editor-form .remove-question-btn {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 0.8em;
+    background-color: #D2691E;
+}
+
+/* Style for the main "Add Question" button */
+#add-question-btn {
+    color: #000000; /* Black text */
+    text-shadow: 1px 1px #FFF; /* White shadow for contrast */
+}
+
+/* Common styles for the smaller Add/Remove Option buttons */
+.add-option-btn, .remove-option-btn {
+    font-size: 0.8em !important; /* Smaller font size */
+    padding: 8px 12px !important; /* Reduced padding to make the button smaller */
+    color: #000000 !important; /* Black text */
+    text-shadow: 1px 1px #FFF !important; /* White shadow for contrast */
+    margin-left: 10px; /* Adds a little space between elements */
+}
+
+/* Specific color for the remove button to distinguish it */
+.remove-option-btn {
+    background-color: #D2691E !important; /* A distinct 'remove' color */
+}
+
+.add-option-btn {
+    margin-top: 15px !important; /* Adds space above the button */
+}

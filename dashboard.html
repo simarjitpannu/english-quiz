@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Minecraft Adventure Base!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="minecraft-bg"></div>
+
+    <div id="dashboard-view" class="container minecraft-card">
+        <h1 class="game-title">
+            <span id="welcome-title" class="block-text" data-text="Welcome Buddy!">Welcome Buddy!</span>
+        </h1>
+        
+        <div id="grade-selection-view">
+            <h2 class="minecraft-font">Choose Your Grade Level!</h2>
+            <div class="selection-grid">
+                <button class="btn minecraft-btn selection-btn" data-grade="3">Grade 3 🌲</button>
+                <button class="btn minecraft-btn selection-btn" data-grade="4">Grade 4 ⛏️</button>
+                <button class="btn minecraft-btn selection-btn" data-grade="5">Grade 5 🔥</button>
+            </div>
+        </div>
+
+        <div id="category-selection-view" style="display: none;">
+            <h2 class="minecraft-font">Choose a Category!</h2>
+            <div class="selection-grid">
+                <button class="btn minecraft-btn selection-btn" data-category="Grammar">Grammar</button>
+                <button class="btn minecraft-btn selection-btn" data-category="Comprehension">Comprehension</button>
+                <button class="btn minecraft-btn selection-btn" data-category="Literature">Literature</button>
+            </div>
+            <button class="btn minecraft-btn back-btn" id="back-to-grade">Back to Grades</button>
+        </div>
+
+        <div id="chapter-list-view" style="display: none;">
+            <h2 class="minecraft-font" id="chapter-list-title">Chapters</h2>
+            <div id="chapter-list-container" class="chapter-list"></div>
+            <button class="btn minecraft-btn back-btn" id="back-to-category">Back to Categories</button>
+        </div>
+
+        <button class="btn minecraft-btn primary-btn logout-btn">Exit to the login screen</button>
+    </div>
+
+    <div id="quiz-view" style="display: none;">
+        <div class="wooden-plank-quiz-container">
+            <h2 id="quiz-title" class="minecraft-font">Chapter Title</h2>
+            <div class="quiz-timer" id="quiz-timer">Time: 0s</div>
+            <div class="quiz-content-box">
+                <p id="quiz-paragraph"></p>
+                <div id="quiz-questions-container"></div>
+            </div>
+            <button id="submit-quiz-btn" class="btn minecraft-btn primary-btn">Submit Mission!</button>
+        </div>
+    </div>
+    
+    <div id="results-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content certificate-modal">
+            <div id="certificate">
+                <div class="cert-header">
+                    <span class="cert-star">⭐</span>
+                    <h2 class="minecraft-font certificate-title">Well Done!</h2>
+                    <span class="cert-star">⭐</span>
+                </div>
+                <p class="certificate-info">This certifies that</p>
+                <h3 id="cert-user-name" class="minecraft-font certificate-user-name">Player Name</h3>
+                <p class="certificate-info">has successfully completed the quiz</p>
+                <h4 id="cert-chapter-name" class="minecraft-font certificate-quiz-title">"Quiz Title"</h4>
+                <div class="certificate-details">
+                    <p>Score: <span id="cert-score">0 / 0</span></p>
+                    <p>Time: <span id="cert-time">0 seconds</span></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="download-cert-btn" class="btn minecraft-btn">Download Badge</button>
+                <button id="close-modal-btn" class="btn minecraft-btn primary-btn">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="leaderboard-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content minecraft-card">
+             <h2 class="minecraft-font" id="leaderboard-title">Leaderboard</h2>
+             <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body"></tbody>
+             </table>
+             <button id="close-leaderboard-btn" class="btn minecraft-btn primary-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="dashboard-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgElement = document.querySelector('.minecraft-bg');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const tileSize = 16;
+            const canvasSize = 256;
+            canvas.width = canvasSize;
+            canvas.height = canvasSize;
+            const stoneColors = ["#7a7a7a", "#5c5c5c", "#444444"];
+            const mossColors  = ["#3c6e3c", "#2f5e2f"];
+            for (let y = 0; y < canvas.height; y += tileSize) {
+                for (let x = 0; x < canvas.width; x += tileSize) {
+                    if (Math.random() < 0.2) {
+                        ctx.fillStyle = mossColors[Math.floor(Math.random() * mossColors.length)];
+                    } else {
+                        ctx.fillStyle = stoneColors[Math.floor(Math.random() * stoneColors.length)];
+                    }
+                    ctx.fillRect(x, y, tileSize, tileSize);
+                }
+            }
+            const backgroundUrl = canvas.toDataURL();
+            bgElement.style.backgroundImage = `url(${backgroundUrl})`;
+        });
+    </script>
+</body>
+</html>
