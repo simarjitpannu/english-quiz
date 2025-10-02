@@ -20,6 +20,10 @@
             <h2 id="auth-header" class="minecraft-font">Login</h2>
 
             <form id="auth-form">
+                <div class="input-group" id="full-name-group" style="display: none;">
+                    <label for="full_name" class="minecraft-label">Full Name:</label>
+                    <input type="text" id="full_name" placeholder="Name" class="minecraft-input-field">
+                </div>
                 <div class="input-group">
                     <label for="email" class="minecraft-label">Email:</label>
                     <input type="email" id="email" placeholder="example@gmail.com" required class="minecraft-input-field">
@@ -30,6 +34,7 @@
                 </div>
 
                 <button type="submit" id="auth-button" class="btn minecraft-btn primary-btn">Start Quizing!</button>
+                
                 <p class="toggle-link">
                     <span id="toggle-auth-text">Forgot your password?</span> 
                     <a href="#" id="toggle-auth-mode" class="minecraft-link">Create a New Account!</a>
