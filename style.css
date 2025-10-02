@@ -256,12 +256,12 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
 }
 
 .minecraft-link {
-    color: #8BC34A;
+    color: #558B2F; /* This is the new, darker green */
     text-decoration: none;
-    font-weight: bold;
-    text-shadow: 1px 1px #388E3C;
+    text-shadow: 1px 1px #3E3E3E; /* A slightly darker shadow for better contrast */
     transition: color 0.2s ease;
 }
+
 
 .minecraft-link:hover {
     color: #A5D6A7;
