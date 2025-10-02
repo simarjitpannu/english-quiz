@@ -20,6 +20,10 @@
             <h2 id="auth-header" class="minecraft-font">Login</h2>
 
             <form id="auth-form">
+                <div class="input-group" id="full-name-group" style="display: none;">
+                    <label for="full_name" class="minecraft-label">Full Name:</label>
+                    <input type="text" id="full_name" placeholder="Name" class="minecraft-input-field">
+                </div>
                 <div class="input-group">
                     <label for="email" class="minecraft-label">Email:</label>
                     <input type="email" id="email" placeholder="example@gmail.com" required class="minecraft-input-field">
@@ -27,18 +31,6 @@
                 <div class="input-group">
                     <label for="password" class="minecraft-label">Password:</label>
                     <input type="password" id="password" placeholder="Dont share with others!" required class="minecraft-input-field">
-                </div>
-
-                <div class="role-selection" id="role-selection" style="display: none;">
-                    <label class="minecraft-label">Are you a:</label>
-                    <div class="radio-group">
-                        <input type="radio" id="role-student" name="role" value="student" checked>
-                        <label for="role-student" class="minecraft-radio-label">Student Explorer</label>
-                    </div>
-                    <div class="radio-group">
-                        <input type="radio" id="role-teacher" name="role" value="teacher">
-                        <label for="role-teacher" class="minecraft-radio-label">Teacher Architect</label>
-                    </div>
                 </div>
 
                 <button type="submit" id="auth-button" class="btn minecraft-btn primary-btn">Start Quizing!</button>
