@@ -137,7 +137,6 @@ function addQuestionField(question = {}) {
 function addOptionInput(container, key, value = '') {
     const optionDiv = document.createElement('div');
     optionDiv.className = 'option-input-block';
-    // Changed the button text from 'X' to 'Remove option'
     optionDiv.innerHTML = `
         <label class="option-label">Option ${key.toUpperCase()}:</label>
         <input type="text" class="minecraft-input-field option-text" data-option-key="${key}" value="${value}" required>
@@ -247,6 +246,57 @@ async function deleteQuiz(quizId) {
 
     fetchAndDisplayChapters();
 }
+
+// In English Quiz/teacher-admin-script.js
+
+async function downloadSubmissions() {
+    if (!selectedGrade || !selectedCategory) {
+        alert("Please select a grade and category before downloading submissions.");
+        return;
+    }
+
+    const { data, error } = await supabaseClient.rpc('get_submissions_for_export', {
+        grade_param: parseInt(selectedGrade),
+        category_param: selectedCategory
+    });
+
+    if (error) {
+        alert('An error occurred while fetching submissions data. Please check the console for details.');
+        console.error(error);
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        alert('No submissions found for this grade and category to download.');
+        return;
+    }
+
+    const submissionsByTeacher = data.reduce((acc, submission) => {
+        const teacher = submission.teacher_name || 'Unknown Teacher';
+        if (!acc[teacher]) acc[teacher] = [];
+        acc[teacher].push({
+            'Student Name': submission.student_name,
+            'Chapter': submission.chapter_title,
+            'Score': submission.score,
+            'Time (seconds)': submission.time_taken_seconds,
+            'Grade': submission.grade,
+            'Section': submission.section
+        });
+        return acc;
+    }, {});
+
+    const wb = XLSX.utils.book_new();
+    for (const teacher in submissionsByTeacher) {
+        const ws = XLSX.utils.json_to_sheet(submissionsByTeacher[teacher]);
+        XLSX.utils.book_append_sheet(wb, ws, teacher.substring(0, 31));
+    }
+    XLSX.writeFile(wb, `Submissions_Grade${selectedGrade}_${selectedCategory}.xlsx`);
+}
+// Add event listener for the new button
+document.addEventListener('click', async (e) => {
+    // ... (existing event listeners) ...
+    if (e.target.id === 'download-submissions-btn') downloadSubmissions();
+});
 
 async function handleLogout() {
     await supabaseClient.auth.signOut();
