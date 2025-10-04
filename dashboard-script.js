@@ -185,6 +185,13 @@ async function submitQuiz() {
     certChapterName.textContent = `"${currentQuizData.chapter_title}"`;
     certScore.textContent = `${score} / ${totalQuestions}`;
     certTime.textContent = `${timeElapsed} seconds`;
+
+    const { data: profile } = await supabaseClient.from('profiles').select('grade, section, teacher_name').eq('id', currentUser.id).single();
+    if (profile) {
+        document.getElementById('cert-grade-section').textContent = `(Grade ${profile.grade}${profile.section})`;
+        document.getElementById('cert-teacher-signature').textContent = profile.teacher_name;
+    }
+
     resultsModal.style.display = 'flex';
 }
 
