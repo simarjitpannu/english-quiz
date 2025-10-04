@@ -262,7 +262,6 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
     transition: color 0.2s ease;
 }
 
-
 .minecraft-link:hover {
     color: #A5D6A7;
     text-decoration: underline;
@@ -1289,4 +1288,24 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
 
 .add-option-btn {
     margin-top: 15px !important; /* Adds space above the button */
+}
+
+.certificate-signature {
+    text-align: right;
+    margin-top: 30px;
+    font-family: 'Dancing Script', cursive; /* A cursive font for the signature */
+}
+.certificate-signature p {
+    font-size: 1.8em;
+    color: #3A1F09;
+    margin: 0;
+    border-bottom: 2px solid #5C2B0B;
+}
+.certificate-signature span {
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+    color: #5C2B0B;
+}
+#download-submissions-btn {
+    margin-bottom: 20px;
 }
