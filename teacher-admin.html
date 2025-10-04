@@ -6,6 +6,7 @@
     <title>Teacher Admin Panel</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -37,6 +38,7 @@
         
         <div id="chapter-management-view" style="display: none;">
             <h2 class="minecraft-font" id="chapter-management-title"></h2>
+            <button class="btn minecraft-btn" id="download-submissions-btn">Download Submissions</button>
             <div id="chapter-list-container" class="chapter-list"></div>
             <button class="btn minecraft-btn primary-btn" id="add-new-quiz-btn">+ Add New Chapter</button>
             <button class="btn minecraft-btn back-btn" id="back-to-category">Back to Categories</button>
