@@ -6,6 +6,7 @@
     <title>Your Minecraft Adventure Base!</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -67,11 +68,19 @@
                 </div>
                 <p class="certificate-info">This certifies that</p>
                 <h3 id="cert-user-name" class="minecraft-font certificate-user-name">Player Name</h3>
+                
+                <p id="cert-grade-section" class="certificate-info"></p>
+            
                 <p class="certificate-info">has successfully completed the quiz</p>
                 <h4 id="cert-chapter-name" class="minecraft-font certificate-quiz-title">"Quiz Title"</h4>
                 <div class="certificate-details">
                     <p>Score: <span id="cert-score">0 / 0</span></p>
                     <p>Time: <span id="cert-time">0 seconds</span></p>
+                </div>
+            
+                <div class="certificate-signature">
+                    <p id="cert-teacher-signature"></p>
+                    <span>English Teacher</span>
                 </div>
             </div>
             <div class="modal-actions">
