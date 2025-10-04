@@ -18,6 +18,10 @@ const forgotPasswordLink = document.getElementById('forgot-password');
 const messageArea = document.getElementById('message-area');
 const fullNameGroup = document.getElementById('full-name-group');
 const fullNameInput = document.getElementById('full_name');
+const studentInfoGroup = document.getElementById('student-info-group');
+const gradeInput = document.getElementById('grade');
+const sectionInput = document.getElementById('section');
+const teacherNameInput = document.getElementById('teacher_name');
 
 let isSignUpMode = false;
 
@@ -39,6 +43,10 @@ function updateAuthUI() {
         if(forgotPasswordLink) forgotPasswordLink.style.display = 'none';
         if (fullNameGroup) fullNameGroup.style.display = 'block';
         if (fullNameInput) fullNameInput.required = true;
+        if (studentInfoGroup) studentInfoGroup.style.display = 'block';
+        if (gradeInput) gradeInput.required = true;
+        if (sectionInput) sectionInput.required = true;
+        if (teacherNameInput) teacherNameInput.required = true;
     } else {
         authHeader.textContent = "Login";
         authButton.textContent = "Start Quizing!";
@@ -47,6 +55,10 @@ function updateAuthUI() {
         if(forgotPasswordLink) forgotPasswordLink.style.display = 'block';
         if (fullNameGroup) fullNameGroup.style.display = 'none';
         if (fullNameInput) fullNameInput.required = false;
+        if (studentInfoGroup) studentInfoGroup.style.display = 'none';
+        if (gradeInput) gradeInput.required = false;
+        if (sectionInput) sectionInput.required = false;
+        if (teacherNameInput) teacherNameInput.required = false;
     }
 }
 
@@ -64,14 +76,19 @@ authForm.addEventListener('submit', async (event) => {
 
     if (isSignUpMode) {
         const fullName = fullNameInput.value;
-
-        // **THE FIX:** Pass the full name in the 'data' field for the trigger to use.
+        const grade = gradeInput.value;
+        const section = sectionInput.value;
+        const teacherName = teacherNameInput.value;
+    
         const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
             options: {
                 data: {
-                    full_name: fullName
+                    full_name: fullName,
+                    grade: grade,
+                    section: section,
+                    teacher_name: teacherName
                 }
             }
         });
