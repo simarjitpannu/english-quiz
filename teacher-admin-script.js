@@ -110,7 +110,7 @@ function addQuestionField(question = {}) {
     // Basic HTML structure for the question text and a container for options
     questionDiv.innerHTML = `
         <label>Question:</label>
-        <input type="text" class="minecraft-input-field question-text" value="${question.question_text || ''}" required>
+        <textarea class="minecraft-input-field question-text" rows="3" required>${question.question_text || ''}</textarea>
         <div class="options-container"></div>
         <button type="button" class="btn minecraft-btn add-option-btn">+ Add Option</button>
         <label>Correct Answer:</label>
