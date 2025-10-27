@@ -1309,3 +1309,26 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
 #download-submissions-btn {
     margin-bottom: 20px;
 }
+
+/* 1. Makes the teacher's chapter list scrollable */
+#chapter-list-container {
+    max-height: 400px;  /* Sets a fixed height for the list */
+    overflow-y: auto;   /* Adds a vertical scrollbar only when needed */
+    padding: 15px;      /* Adds some internal padding to the new box */
+    background-color: rgba(0,0,0,0.1); /* Adds a slight inset effect */
+    border: 2px solid #5C5C5C; /* Defines the scrollable area */
+    border-radius: 5px;
+}
+
+/* 2. Makes the paragraph textarea in the editor taller (for pic 2) */
+#quiz-editor-form #paragraph {
+    height: 250px; /* Increases height from the default 5 rows */
+    resize: vertical; /* Still allows the user to resize it manually */
+}
+/* Add this to the end of style.css */
+
+/* Makes the question input a resizable, multi-line textarea */
+#quiz-editor-form .question-text {
+    height: auto;       /* Allows the 'rows' attribute to set the height */
+    resize: vertical; /* Allows the user to drag-resize it vertically */
+}
