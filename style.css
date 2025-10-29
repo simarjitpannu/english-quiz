@@ -1336,3 +1336,8 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
     height: auto;
     resize: vertical;
 }
+#quiz-view .options-group label {
+    white-space: normal;  /* Ensures text wraps */
+    word-wrap: break-word;  /* Breaks long words if necessary */
+    line-height: 1.4;       /* Adds a bit of space for multi-line text */
+}
