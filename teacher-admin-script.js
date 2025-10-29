@@ -45,6 +45,12 @@ async function init() {
     showView('grade');
 }
 
+function extractLessonNumber(title) {
+    const match = title.match(/^LESSON (\d+)/i);
+    // If a match is found, return the number. Otherwise, return 0.
+    return match ? parseInt(match[1]) : 0;
+}
+
 function showView(viewName) {
     if(gradeSelectionView) gradeSelectionView.style.display = 'none';
     if(categorySelectionView) categorySelectionView.style.display = 'none';
@@ -64,6 +70,14 @@ async function fetchAndDisplayChapters() {
         .eq('category', selectedCategory);
 
     if (error) return console.error('Error fetching quizzes:', error);
+
+    // --- ADD THIS SORTING LOGIC ---
+    quizzes.sort((a, b) => {
+        const numA = extractLessonNumber(a.chapter_title);
+        const numB = extractLessonNumber(b.chapter_title);
+        return numA - numB;
+    });
+    // --- END OF NEW LOGIC ---
 
     chapterListContainer.innerHTML = '';
     if (quizzes.length === 0) {
@@ -139,7 +153,7 @@ function addOptionInput(container, key, value = '') {
     optionDiv.className = 'option-input-block';
     optionDiv.innerHTML = `
         <label class="option-label">Option ${key.toUpperCase()}:</label>
-        <input type="text" class="minecraft-input-field option-text" data-option-key="${key}" value="${value}" required>
+        <textarea class="minecraft-input-field option-text" data-option-key="${key}" rows="2" required>${value}</textarea>
         <button type="button" class="btn minecraft-btn remove-option-btn">Remove option</button>
     `;
     container.appendChild(optionDiv);
