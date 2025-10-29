@@ -1332,3 +1332,7 @@ h1, h2, button, .minecraft-label, .minecraft-radio-label {
     height: auto;       /* Allows the 'rows' attribute to set the height */
     resize: vertical; /* Allows the user to drag-resize it vertically */
 }
+#quiz-editor-form .option-text {
+    height: auto;
+    resize: vertical;
+}
