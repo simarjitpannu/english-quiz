@@ -47,6 +47,12 @@ function shuffleArray(array) {
   }
 }
 
+function extractLessonNumber(title) {
+    const match = title.match(/^LESSON (\d+)/i);
+    // If a match is found, return the number. Otherwise, return 0.
+    return match ? parseInt(match[1]) : 0;
+}
+
 // --- Main Functions ---
 
 async function init() {
@@ -101,6 +107,13 @@ async function fetchAndDisplayChapters() {
     chapterListTitle.textContent = `Grade ${selectedGrade} - ${selectedCategory}`;
     const { data: quizzes, error } = await supabaseClient.from('quizzes').select('id, chapter_title').eq('grade', selectedGrade).eq('category', selectedCategory);
     if (error) { console.error('Error fetching quizzes:', error); return; }
+
+    // --- ADD THIS SORTING LOGIC ---
+    quizzes.sort((a, b) => {
+        const numA = extractLessonNumber(a.chapter_title);
+        const numB = extractLessonNumber(b.chapter_title);
+        return numA - numB;
+    });
     
     chapterListContainer.innerHTML = '';
     if (quizzes.length === 0) {
