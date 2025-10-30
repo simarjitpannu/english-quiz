@@ -288,11 +288,14 @@ async function downloadSubmissions() {
     const submissionsByTeacher = data.reduce((acc, submission) => {
         const teacher = submission.teacher_name || 'Unknown Teacher';
         if (!acc[teacher]) acc[teacher] = [];
+        
+        // --- ADD THE NEW "Submitted At" LINE HERE ---
         acc[teacher].push({
             'Student Name': submission.student_name,
             'Chapter': submission.chapter_title,
             'Score': submission.score,
-            'Time (seconds)': submission.time_taken_seconds,
+            'Time Taken': submission.time_taken_formatted,
+            'Submitted At': new Date(submission.submitted_at).toLocaleString(), // Formats the date
             'Grade': submission.grade,
             'Section': submission.section
         });
