@@ -129,6 +129,12 @@ async function fetchAndDisplayChapters() {
     showView('chapters');
 }
 
+function formatTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}m ${seconds}s`;
+}
+
 async function startQuiz(quizId) {
     const { data: quizData, error } = await supabaseClient.from('quizzes').select('*').eq('id', quizId).single();
     if (error) return console.error(error);
@@ -136,8 +142,6 @@ async function startQuiz(quizId) {
     const { data: questionsData, error: qError } = await supabaseClient.from('questions').select('*').eq('quiz_id', quizId);
     if (qError) return console.error(qError);
 
-    // --- NEW: Shuffle the questions ---
-    shuffleArray(questionsData);
 
     currentQuizData = { ...quizData, questions: questionsData };
     
@@ -152,7 +156,6 @@ async function startQuiz(quizId) {
 
             // --- NEW: Shuffle the options ---
             const optionsArray = Object.entries(q.options); // Convert options object to an array
-            shuffleArray(optionsArray); // Shuffle the array
 
             let optionsHTML = '';
             if (q.options && typeof q.options === 'object') {
@@ -177,10 +180,10 @@ async function startQuiz(quizId) {
 
 function startTimer() {
     timeElapsed = 0;
-    quizTimer.textContent = `Time: 0s`;
+    quizTimer.textContent = `Time: 0m 0s`; // Updated
     timerInterval = setInterval(() => {
         timeElapsed++;
-        quizTimer.textContent = `Time: ${timeElapsed}s`;
+        quizTimer.textContent = `Time: ${formatTime(timeElapsed)}`; // Updated
     }, 1000);
 }
 
@@ -192,12 +195,22 @@ async function submitQuiz() {
         if (selectedOption && selectedOption.value === q.correct_option) { score++; }
     });
     const totalQuestions = currentQuizData.questions.length;
-    await supabaseClient.from('submissions').insert({ quiz_id: currentQuizData.id, student_id: currentUser.id, score: score, time_taken_seconds: timeElapsed });
-    
+
+    // --- THIS PART IS UPDATED ---
+    const formattedTime = formatTime(timeElapsed); // Get the formatted time
+
+    await supabaseClient.from('submissions').insert({ 
+        quiz_id: currentQuizData.id, 
+        student_id: currentUser.id, 
+        score: score, 
+        time_taken_seconds: timeElapsed, // Still save the seconds
+        time_taken_formatted: formattedTime // Save the new string
+    });
+
     certUserName.textContent = currentProfile.full_name;
     certChapterName.textContent = `"${currentQuizData.chapter_title}"`;
     certScore.textContent = `${score} / ${totalQuestions}`;
-    certTime.textContent = `${timeElapsed} seconds`;
+    certTime.textContent = formattedTime; // Use the formatted time
 
     const { data: profile } = await supabaseClient.from('profiles').select('grade, section, teacher_name').eq('id', currentUser.id).single();
     if (profile) {
